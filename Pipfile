@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-cors = "*"
+pymongo = {extras = ["srv"], version = "*"}
 
 [dev-packages]
 pep8 = "*"
@@ -21,3 +22,4 @@ start = "gunicorn app:app"
 dev = "bash -c \"export FLASK_ENV='development' && flask run\" "
 test = "pytest ."
 coverage = "pytest --cov-report term-missing --cov=. "
+freeze = "pip freeze > requirements.txt"
