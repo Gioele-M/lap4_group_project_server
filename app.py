@@ -7,9 +7,9 @@ import os
 app = Flask(__name__)
 
 load_dotenv()
-#{os.environ.get('password')}
 
-connection_url = f"mongodb+srv://gio:gio@cluster0.er7j3.mongodb.net/?retryWrites=true&w=majority"
+
+connection_url = f"mongodb+srv://gio:{os.environ.get('password')}@cluster0.er7j3.mongodb.net/?retryWrites=true&w=majority"
 
 client = MongoClient(connection_url)
 
@@ -28,7 +28,7 @@ def home_route():
 
 @app.route('/newuser')
 def new_user():
-    db.users.insert_one({'username': 'testuser'})
+    db.users.insert_one({'username': 'testusxxxer'})
     return 'True', 204
 
 
