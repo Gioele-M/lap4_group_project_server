@@ -23,13 +23,12 @@ CORS(app)
 users_model = {
     'username': 'Matteo',
     'hashedPassword': 'notsohashed',
-    'userEmail': 'matteo@gmail.com',
+    'userEmail': 'matteo@gmail.com', #primary key
     'token': 'token_string',
     'previousTokens': ['token1', 'token2'],
-    'lastSelection': {'selectedNote': 'chapter1', 'selectedPlaylist': 'playlistName'},
-    'recentNotes': [
-        {'selectedNote': 'chapter2', 'selectedPlaylist': 'playlistNameX'}, 
-        {'selectedNote': 'chapter3', 'selectedPlaylist': 'playlistNameY'}
+    'lastSelection': [{'selectedNote': 'chapter1', 'selectedPlaylist': 'playlistName'}],
+    'recentPlaylist': [
+        'playlist1'
         ],
     'favourites': ['playlistNameX', 'playlistNameY'],
     'achievement': ['badgeX', 'badgeY']
@@ -53,16 +52,19 @@ playlist_model = {
     'commentSection': [
         {
             'commentID': 1, #sequential
+            'timestamp': '00.00.00.10.05.22',
             'username': 'Matteo',
             'userEmail': 'matteo@gmail.com',
             'comment': 'This playlist is great :)',
             'thread': [
                 {
+                    'timestamp': '00.00.00.10.05.22',
                     'username': 'Gio',
                     'userEmail': 'gioele@gmail.com',
                     'reply': 'great indeed!'
                 },
-                {
+                {   
+                    'timestamp': '00.00.00.10.05.22',
                     'username': 'Igor',
                     'userEmail': 'igor@gmail.com',
                     'reply': 'Looks great but I would add another section!'
@@ -78,7 +80,8 @@ playlist_model = {
                 'video_url': 'youtube.com',
                 'start': '0.00',
                 'end': '0.30',
-                'text': 'This is the section with the notes on the first chapter'
+                'text': 'This is the section with the notes on the first chapter',
+                'keywords': []
             }
 
             
