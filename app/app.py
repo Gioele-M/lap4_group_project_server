@@ -50,6 +50,7 @@ playlist_model = {
     'editingAccess': ['gioele@gmail.com', 'igor@gmail.com'],
     'public': True,
     'playlistTheme': '(0,0,0)',
+    'tags': ['tag1', 'tag2'],
     'averageStars': {
         'currentRating': 3.5,
         'totalStars': 7,
@@ -120,16 +121,25 @@ def playlist_sample():
 # def new_user():
 #     db.users.insert_one({'username': 'testusxxxer'})
 #     return 'True', 204
+import pprint
 
 @app.route('/allusers')
 def find_all():
+    print('*'*20)
+
     _users = db.users.find()
-    users = [{'username': user['username']} for user in _users]
+    for user in _users:
+        pprint.pprint(user)
+    print('*'*20)
+
+    users = [{'username': user} for user in _users]
 
     return jsonify({'users': users}), 200
 
 
 
 
+
+
 if __name__ == '__main__':
-    app.run(port=4000)
+    app.run(port=4000, host='0.0.0.0')

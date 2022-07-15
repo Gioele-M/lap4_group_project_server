@@ -4,17 +4,17 @@ services:
     container_name: api_production
     build:
       context: .
-    command: bash -c "python app.py"
+    command: bash -c "export FLASK_ENV='development' && flask run --host=0.0.0.0"
     ports:
-      - 4000:4000
+      - 5000:5000
     volumes:
       - type: bind
         source: ./app
-        target: /app 
+        target: /app
     depends_on:
       - db
   db:
-    container_name: db_production
+    # container_name: db_production
     image: mongo:latest
     hostname: mongodb_production
     environment:
