@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
 import os
@@ -7,14 +7,23 @@ app = Flask(__name__)
 try:
     from dotenv import load_dotenv
     load_dotenv()
+    client = MongoClient(
+        host='mongodb_production',
+        port=27017,
+        username='root',
+        password='pass',
+        authSource='admin'
+    )
+    db=client['wewa']
+    
 except:
     print("We're in production now!")
+    #THIS CONNECTS TO ATLAS
+    connection_url = f"mongodb+srv://gio:{os.environ.get('password')}@cluster0.er7j3.mongodb.net/?retryWrites=true&w=majority"
+    client = MongoClient(connection_url)
+    db = client.get_database('wewa')
 
-connection_url = f"mongodb+srv://gio:{os.environ.get('password')}@cluster0.er7j3.mongodb.net/?retryWrites=true&w=majority"
 
-client = MongoClient(connection_url)
-
-db = client.get_database('wewa')
 # the two collections are playlist and users
 
 
@@ -33,6 +42,7 @@ users_model = {
     'favourites': ['playlistNameX', 'playlistNameY'],
     'achievement': ['badgeX', 'badgeY']
 }
+
 
 playlist_model = {
     'playlistName': 'playlistX',
@@ -91,7 +101,9 @@ playlist_model = {
 
 
 
-
+@app.route('/')
+def home():
+    return 'this works'
 
 @app.route('/userSample', methods=['GET'])
 def user_sample():
@@ -109,7 +121,15 @@ def playlist_sample():
 #     db.users.insert_one({'username': 'testusxxxer'})
 #     return 'True', 204
 
+@app.route('/allusers')
+def find_all():
+    _users = db.users.find()
+    users = [{'username': user['username']} for user in _users]
 
-# def find_all():
-#     users = db.users.find()
-#     return str(users), 200
+    return jsonify({'users': users}), 200
+
+
+
+
+if __name__ == '__main__':
+    app.run(port=4000)

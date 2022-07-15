@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    container_name: api_production
+    build:
+      context: .
+    command: bash -c "python app.py"
+    ports:
+      - 4000:4000
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app 
+    depends_on:
+      - db
+  db:
+    container_name: db_production
+    image: mongo:latest
+    hostname: mongodb_production
+    environment:
+      - MONGO_INITDB_DATABASE=wewa
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    volumes:
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    ports:
+      - 27017:27017
