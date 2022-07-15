@@ -1,12 +1,15 @@
+import pprint
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
 import os
 
 app = Flask(__name__)
+
 try:
     from dotenv import load_dotenv
     load_dotenv()
+
     client = MongoClient(
         host='mongodb_production',
         port=27017,
@@ -14,7 +17,8 @@ try:
         password='pass',
         authSource='admin'
     )
-    db=client['wewa']
+    print(client)
+    db=client.get_database('wewa')
     
 except:
     print("We're in production now!")
@@ -100,6 +104,24 @@ playlist_model = {
     ]
 }
 
+# result = db.users.insert_many(([
+#     {
+#         "username": 'Matteo',
+#         "userEmail": "matteo@gmail.com",
+#         "password": "pass"
+#     },
+#     {
+#         "username": 'Gio',
+#         "name": "gio@gmail.com",
+#         "password": "pass"
+#     },
+#     {
+#         "username": 'Igor',
+#         "name": "igor@gmail.com",
+#         "password": "pass"
+#     },
+# ]))
+
 
 
 @app.route('/')
@@ -121,18 +143,14 @@ def playlist_sample():
 # def new_user():
 #     db.users.insert_one({'username': 'testusxxxer'})
 #     return 'True', 204
-import pprint
 
 @app.route('/allusers')
 def find_all():
-    print('*'*20)
-
+        
     _users = db.users.find()
-    for user in _users:
-        pprint.pprint(user)
-    print('*'*20)
 
-    users = [{'username': user} for user in _users]
+
+    users = [{'username': user['username']} for user in _users]
 
     return jsonify({'users': users}), 200
 

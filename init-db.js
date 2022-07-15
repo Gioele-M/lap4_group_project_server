@@ -3,17 +3,17 @@ db.users.drop();
 
 db.users.insertMany([
     {
-        "id": 1,
+        "username": 1,
         "name": "Lion",
         "type": "wild"
     },
     {
-        "id": 2,
+        "username": 2,
         "name": "Cow",
         "type": "domestic"
     },
     {
-        "id": 3,
+        "username": 3,
         "name": "Tiger",
         "type": "wild"
     },
