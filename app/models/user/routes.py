@@ -15,8 +15,8 @@ def signout():
     return User().signout() 
 
 
-# @app.route('/user/login', methods=['POST'])
-# def login():
-#     if request.method == 'POST':
-#         return User().login()
-#     return 'get login method '
+@app.route('/user/login', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        return User().login()
+    return 'get login method '

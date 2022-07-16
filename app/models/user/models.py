@@ -47,16 +47,16 @@ class User:
 
 
 
-    # def login(self):
-    #     data = request.get_json()
-    #     user = db.users.find_one({
-    #         'userEmail':  data['email']
-    #     })
+    def login(self):
+        data = request.get_json()
+        user = db.users.find_one({
+            'userEmail':  data['email']
+        })
 
-    #     if user:
-    #         return self.start_session(user)
+        if user and pbkdf2_sha256.verify(data['password'], user['password']):
+            return self.start_session(user)
 
-    #     return jsonify({'error': 'Invalid login credentials'}), 401
+        return jsonify({'error': 'Invalid login credentials'}), 401
 
 
     def signout(self):
