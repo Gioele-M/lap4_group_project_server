@@ -8,6 +8,7 @@ flask = "*"
 flask-cors = "*"
 pymongo = {extras = ["srv"], version = "*"}
 gunicorn = "*"
+passlib = "*"
 
 [dev-packages]
 pep8 = "*"
