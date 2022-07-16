@@ -3,18 +3,21 @@ db.users.drop();
 
 db.users.insertMany([
     {
-        "username": 1,
-        "name": "Lion",
-        "type": "wild"
+        "_id": "c1db01dce06d4088b65b21a43536d81c",
+        "password": "$pbkdf2-sha256$29000$yLm3Viol5BzDuDeGMIbQGg$rFspp6mcmzFZHx/DCymzmqHztJjMcWknCplf6W0KFUc",
+        "userEmail": "gio@gio.com",
+        "username": "Gio"
     },
     {
-        "username": 2,
-        "name": "Cow",
-        "type": "domestic"
+        "_id": "7872916045974f82a3b51dd8ae9eece1",
+        "password": "$pbkdf2-sha256$29000$l1Lqfa/1nvP.f.9dqzVmLA$bReC2CgBmAoZNHm8TlzNd.6Q7CaN1ky6TUTqWvcrxH8",
+        "userEmail": "matteo@gmail.com",
+        "username": "Matteo"
     },
     {
-        "username": 3,
-        "name": "Tiger",
-        "type": "wild"
+        "_id": "d75f3dac482e4eb19cd7ff92cdf3dc84",
+        "password": "$pbkdf2-sha256$29000$3hvDWIvRupdyjjGm1Pr/fw$dW2llVMNWBtX2QxMTzF9z7bzsYvEGYEC.rEdSZdyEmI",
+        "userEmail": "igor@gmail.com",
+        "username": "Igor"
     },
 ]);

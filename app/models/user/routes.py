@@ -7,5 +7,16 @@ from models.user.models import User
 def signup():
     if request.method == 'POST':
         return User().signup()
-    return 'getuser'
- 
+    return 'get user method '
+
+
+@app.route('/user/signout')
+def signout():
+    return User().signout() 
+
+
+# @app.route('/user/login', methods=['POST'])
+# def login():
+#     if request.method == 'POST':
+#         return User().login()
+#     return 'get login method '

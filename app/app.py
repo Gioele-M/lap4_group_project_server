@@ -1,12 +1,14 @@
 import pprint
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 from pymongo import MongoClient
 import os
+from functools import wraps
 
 from temp.sample_data import users_model, playlist_model
 
 app = Flask(__name__)
+app.secret_key = 'fbheifbeibfiefbiefbh'
 
 try:
     from dotenv import load_dotenv
@@ -35,6 +37,16 @@ except:
 CORS(app)
 
 
+# Decorator for login
+def login_required(f):
+    @wraps(f)
+    def wrap(*arg, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return 'You need to be logged in!'
+    return wrap
+
 ## Routes
 from models.user import routes
 
@@ -62,6 +74,7 @@ def playlist_sample():
 #     return 'True', 204
 
 @app.route('/allusers')
+# @login_required
 def find_all():
         
     _users = db.users.find()
