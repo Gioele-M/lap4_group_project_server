@@ -86,19 +86,35 @@ class User:
     def update_favourites(self):
         data = request.get_json()
         new_fav = data['favourite']
+        action = data['action']
         _user = db.users.find_one({
             'userEmail':  data['email']
         })
-        if new_fav in _user['favourites']:
-            return jsonify({ "error": "This is in favourites already" })
 
-        _user['favourites'].append(new_fav)
-        user = db.users.find_one_and_update(
-            {'userEmail':  data['email']},
-            {"$set": {"favourites": _user['favourites']}},
-            return_document = ReturnDocument.AFTER
+        if action == 'add':
+            if new_fav in _user['favourites']:
+                return jsonify({ "error": "This is in favourites already" }), 406
 
-        )
+            _user['favourites'].append(new_fav)
+            user = db.users.find_one_and_update(
+                {'userEmail':  data['email']},
+                {"$set": {"favourites": _user['favourites']}},
+                return_document = ReturnDocument.AFTER
+
+            )
+
+        if action == 'remove':
+            if new_fav not in _user['favourites']:
+                return jsonify({ "error": "This was not in favourites" }), 406
+
+            _user['favourites'].remove(new_fav)
+            user = db.users.find_one_and_update(
+                {'userEmail':  data['email']},
+                {"$set": {"favourites": _user['favourites']}},
+                return_document = ReturnDocument.AFTER
+            )
+
+
         return jsonify(user)
 
 
