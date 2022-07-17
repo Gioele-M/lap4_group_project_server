@@ -10,9 +10,12 @@ def signup():
     return 'get user method '
 
 
+
+
 @app.route('/user/signout')
 def signout():
     return User().signout() 
+
 
 
 @app.route('/user/login', methods=['POST'])
@@ -20,3 +23,9 @@ def login():
     if request.method == 'POST':
         return User().login()
     return 'get login method '
+
+#Request
+# {
+#   "email": "gio@gio.com",
+#   "password": "pass"
+# }

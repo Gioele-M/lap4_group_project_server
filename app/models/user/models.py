@@ -3,6 +3,10 @@ from flask import Flask, jsonify, request, session
 import uuid
 from passlib.hash import pbkdf2_sha256
 from app import db
+import jwt
+import datetime
+from app import app
+
 
 class User:
 
@@ -11,6 +15,14 @@ class User:
         session['logged_in'] = True
         session['user'] = user
         return jsonify(user), 200
+
+    def send_token(self, user):  
+        del user['password']
+        #Token expires in 3h
+        token = jwt.encode({'user': user['username'], 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=3)}, app.config['SECRET_KEY'])
+        user['token'] = token#.decode('UTF-8')
+        return jsonify(user), 200
+
 
 
     #signup user
@@ -54,7 +66,8 @@ class User:
         })
 
         if user and pbkdf2_sha256.verify(data['password'], user['password']):
-            return self.start_session(user)
+            # return self.start_session(user)
+            return self.send_token(user)
 
         return jsonify({'error': 'Invalid login credentials'}), 401
 

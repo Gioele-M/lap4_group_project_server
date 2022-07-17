@@ -1,14 +1,18 @@
+from crypt import methods
 import pprint
+import re
 from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 from pymongo import MongoClient
 import os
 from functools import wraps
+import jwt
 
 from temp.sample_data import users_model, playlist_model
 
 app = Flask(__name__)
-app.secret_key = 'fbheifbeibfiefbiefbh'
+app.secret_key = 'secretkeyforsession'
+app.config['SECRET_KEY'] = 'secretkeyfortokens'
 
 try:
     from dotenv import load_dotenv
@@ -37,7 +41,7 @@ except:
 CORS(app)
 
 
-# Decorator for login
+# Decorator for login session
 def login_required(f):
     @wraps(f)
     def wrap(*arg, **kwargs):
@@ -51,6 +55,24 @@ def login_required(f):
 from models.user import routes
 
 
+#Decorator for validate token
+def token_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        data = request.get_json()
+        token = data['token']
+
+        if not token:
+            return jsonify({'message': 'Token is missing'}), 403
+
+        try:
+            authorised = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])    
+        except Exception as e:
+            print(e, flush=True)
+            return jsonify({'message': 'Token is invalid'}), 498
+
+        return f(*args, **kwargs)
+    return wrap
 
 
 @app.route('/')
@@ -84,6 +106,17 @@ def find_all():
 
     return jsonify({'users': users}), 200
 
+
+
+@app.route('/protected', methods=['POST'])
+@token_required
+def protected():
+    return 'you have access to this'
+
+
+@app.route('/unprotected')
+def unprotected():
+    return 'Access'
 
 
 

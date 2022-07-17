@@ -9,6 +9,7 @@ flask-cors = "*"
 pymongo = {extras = ["srv"], version = "*"}
 gunicorn = "*"
 passlib = "*"
+pyjwt = "*"
 
 [dev-packages]
 pep8 = "*"
