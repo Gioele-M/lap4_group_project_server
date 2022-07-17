@@ -1,31 +1,27 @@
 from crypt import methods
 from flask import Flask, request
-from app import app
+from app import app, token_required
 from models.user.models import User
 
-@app.route('/user/signup', methods=['GET', 'POST'])
+@app.route('/user/signup', methods=['POST'])
 def signup():
-    if request.method == 'POST':
-        return User().signup()
-    return 'get user method '
+    return User().signup()
+    
 
 
 
-
-@app.route('/user/signout')
-def signout():
-    return User().signout() 
+# @app.route('/user/signout')
+# def signout():
+#     return User().signout() 
 
 
 
 @app.route('/user/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        return User().login()
-    return 'get login method '
+    return User().login()
 
-#Request
-# {
-#   "email": "gio@gio.com",
-#   "password": "pass"
-# }
+
+@app.route('/user/favourites', methods=['PATCH'])
+# @token_required
+def update_favourites():
+    return User().update_favourites()

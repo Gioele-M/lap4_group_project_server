@@ -11,8 +11,31 @@ import jwt
 from temp.sample_data import users_model, playlist_model
 
 app = Flask(__name__)
-app.secret_key = 'secretkeyforsession'
+# app.secret_key = 'secretkeyforsession'
 app.config['SECRET_KEY'] = 'secretkeyfortokens'
+
+
+#Decorator for validate token
+def token_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        data = request.get_json()
+        token = data['token']
+
+        if not token:
+            return jsonify({'message': 'Token is missing'}), 403
+
+        try:
+            authorised = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])    
+        except Exception as e:
+            print(e, flush=True)
+            return jsonify({'message': 'Token is invalid'}), 498
+
+        return f(*args, **kwargs)
+    return wrap
+
+
+
 
 try:
     from dotenv import load_dotenv
@@ -39,40 +62,23 @@ except:
 
 
 CORS(app)
-
-
-# Decorator for login session
-def login_required(f):
-    @wraps(f)
-    def wrap(*arg, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            return 'You need to be logged in!'
-    return wrap
-
-## Routes
 from models.user import routes
 
+#Useless
+# # Decorator for login session
+# def login_required(f):
+#     @wraps(f)
+#     def wrap(*arg, **kwargs):
+#         if 'logged_in' in session:
+#             return f(*args, **kwargs)
+#         else:
+#             return 'You need to be logged in!'
+#     return wrap
 
-#Decorator for validate token
-def token_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        data = request.get_json()
-        token = data['token']
+# ## Routes
 
-        if not token:
-            return jsonify({'message': 'Token is missing'}), 403
 
-        try:
-            authorised = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])    
-        except Exception as e:
-            print(e, flush=True)
-            return jsonify({'message': 'Token is invalid'}), 498
 
-        return f(*args, **kwargs)
-    return wrap
 
 
 @app.route('/')
@@ -90,10 +96,6 @@ def playlist_sample():
 
 
 
-# @app.route('/newuser')
-# def new_user():
-#     db.users.insert_one({'username': 'testusxxxer'})
-#     return 'True', 204
 
 @app.route('/allusers')
 # @login_required
