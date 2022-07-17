@@ -15,6 +15,13 @@ def new_playlist():
 
 
 #"GET"
-@app.route('/playlist/search/name', methods=['POST'])
+@app.route('/playlist/search', methods=['POST'])
 def get_by_name():
-    return Playlist().search_by_name()
+    return Playlist().search_by()
+
+
+
+#Patch
+@app.route('/playlist/patch', methods=['PATCH'])
+def patch():
+    return Playlist().patch()

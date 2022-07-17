@@ -1,3 +1,4 @@
+import json
 from flask import Flask, jsonify, request
 from app import db
 from pymongo import ReturnDocument
@@ -49,22 +50,61 @@ class Playlist:
         return jsonify({'error': 'Add playlist failed'}), 400
 
 
-    # GET routes
+    # 'GET' routes
     def show_trending(self):
         pass
         #Need to decide how to rank/make a couple 
         #Order based on averageStar.currentRating, retrieve n max
 
 
-    def search_by_name(self):
+    def search_by(self):
         data = request.get_json()
-        #Finds one bc playlists names are unique
-        playlist = db.playlists.find_one(
-            {'playlistName': data['playlistName']}
-        )
-        print(playlist, flush=True)
-        if playlist:
-            return jsonify(playlist)
+        search_term = list(data.keys())[0]
+        
+        if search_term == 'playlistName':
+            _playlists = db.playlists.find(
+                {'playlistName': data['playlistName']}
+            )
+
+        if search_term == 'playlistOwner':
+            _playlists = db.playlists.find(
+                {'playlistOwner': data['playlistOwner']}
+            )
+
+        if search_term == 'tags':
+            _playlists = db.playlists.find(
+                {'tags': data['tags']}
+            )
+
+        print(search_term, flush=True)
+        if _playlists:
+            playlists = [playlist for playlist in _playlists]
+            return jsonify(playlists)
 
         return jsonify({'error': 'Playlist not found'})
         
+
+
+    def patch(self):
+        data = request.get_json()
+        playlistName = data['playlistName']
+        _patch_term = list(data.keys())
+        _patch_term.remove('playlistName')
+        patch_term = _patch_term[0]
+        
+        if patch_term == 'public':
+            if data[patch_term] == 'True' or data[patch_term] == 'False':
+                playlist = db.playlists.find_one_and_update(
+                    {'playlistName': playlistName},
+                    {'$set': {patch_term: data[patch_term]}},
+                    return_document = ReturnDocument.AFTER
+                    )
+            else:
+                return jsonify({'error': 'You have to set public as either True or False (string)'})
+
+
+        print(playlist, flush=True)
+
+        return jsonify(playlist)
+        
+    

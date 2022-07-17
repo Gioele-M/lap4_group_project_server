@@ -60,8 +60,7 @@ playlist_model = {
                 'video_url': 'youtube.com',
                 'start': '0.00',
                 'end': '0.30',
-                'text': 'This is the section with the notes on the first chapter',
-                'keywords': []
+                'text': 'This is the section with the notes on the first chapter'
             }
 
             
