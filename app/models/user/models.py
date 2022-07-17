@@ -1,12 +1,10 @@
-from re import T
 from flask import Flask, jsonify, request, session
 import uuid
 from passlib.hash import pbkdf2_sha256
-from app import db
 from pymongo import ReturnDocument
 import jwt
 import datetime
-from app import app
+from app import app, db
 
 
 class User:
@@ -103,7 +101,7 @@ class User:
 
             )
 
-        if action == 'remove':
+        elif action == 'remove':
             if new_fav not in _user['favourites']:
                 return jsonify({ "error": "This was not in favourites" }), 406
 
@@ -113,6 +111,9 @@ class User:
                 {"$set": {"favourites": _user['favourites']}},
                 return_document = ReturnDocument.AFTER
             )
+
+        else:
+            return jsonify({'error': 'Action invalid'}), 405        
 
 
         return jsonify(user)
