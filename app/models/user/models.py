@@ -26,8 +26,6 @@ class User:
 
     #signup user
     def signup(self):
-        print('getting in', flush=True)
-        print(request, flush=True)
         
         data = request.get_json()
         # except Exception as e:

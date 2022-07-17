@@ -1,4 +1,5 @@
 from crypt import methods
+import imp
 import pprint
 import re
 from flask import Flask, request, jsonify, session
@@ -62,7 +63,10 @@ except:
 
 
 CORS(app)
+
+#import routes
 from models.user import routes
+from models.playlist import routes
 
 #Useless
 # # Decorator for login session
