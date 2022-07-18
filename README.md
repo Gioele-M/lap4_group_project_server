@@ -1,6 +1,6 @@
 <div id="top"></div>
 <h1 align="center">
-<a href="https://wewacademy.netlify.app" target="_blank"><img src="src/images/readmelogo.png" alt="WWA Logo"/></a>
+<a href="https://wewacademy.netlify.app" target="_blank"><img src="static/img/readmelogo.png" alt="WWA Logo"/></a>
 </h1>
 
 <h2 align="center">An introduction to Write & Watch Academy for beginners</h2>
@@ -111,11 +111,11 @@ The font chosen was XX TBC because it has a clean, modern type that would go wel
 
 The following wireframes were created on the skeleton plane as part of the planning process of the project using [Balsamiq](https://balsamiq.com/)
 
-- [Home Page](src/images/homepage.png)
-- [User Page](src/images/userpage.png)
-- [Playlist Page](src/images/playlistpage.png)
-- [Topic Playlis Page](src/images/topicplaylistpage.png)
-- [General outline](src/images/excalidraw.png)
+- [Home Page](static/img/homepage.png)
+- [User Page](static/img/userpage.png)
+- [Playlist Page](static/img/playlistpage.png)
+- [Topic Playlis Page](static/img/topicplaylistpage.png)
+- [General outline](static/img/excalidraw.png)
 
 <p align="right"><a href="#top">back to top</a></p>
 
