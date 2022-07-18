@@ -138,16 +138,43 @@ class Playlist:
 
                 # Patch tags 
                 if patch_term == 'tags':
+                    old_tags = to_patch['tags']
+                    if data[patch_term] in old_tags:
+                        return jsonify({'error': 'Tag already present'})
+                    old_tags.append(data[patch_term])
+                    playlist = db.playlists.find_one_and_update(
+                            {'playlistName': playlistName},
+                            {'$set': {patch_term: old_tags}},
+                            return_document = ReturnDocument.AFTER
+                            )
                     
-                    pass
 
 
                 if patch_term == 'editingAccess':
-                    pass
+                    has_access = to_patch['editingAccess']
+                    if data[patch_term] in has_access:
+                        return jsonify({'error': 'User has already access'})
+                    has_access.append(data[patch_term])
+                    playlist = db.playlists.find_one_and_update(
+                            {'playlistName': playlistName},
+                            {'$set': {patch_term: has_access}},
+                            return_document = ReturnDocument.AFTER
+                            )
 
 
+                ####### NEED to discuss this
+                # Do we want to patch the chapter changing stuff in it?
+                # Check how to fix if deleting
                 if patch_term == 'chapters':
-                    pass
+                    old_chapters = to_patch[patch_term]
+                    old_chapters.append({f'chapter{len(old_chapters)+1}': data[patch_term]})
+
+                    playlist = db.playlists.find_one_and_update(
+                            {'playlistName': playlistName},
+                            {'$set': {patch_term: old_chapters}},
+                            return_document = ReturnDocument.AFTER
+                            )
+                    
             
             else:
                 return jsonify({'error': 'You do not have editing access for this playlist'})
