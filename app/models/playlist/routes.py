@@ -21,7 +21,12 @@ def get_by_name():
 
 
 
-#Patch
+#Patch requiring the userRequesting 
 @app.route('/playlist/patch', methods=['PATCH'])
 def patch():
     return Playlist().patch()
+
+#patch for everyone
+@app.route('/playlist/patchall', methods=['PATCH'])
+def patchall():
+    return Playlist().patch_all()

@@ -1,4 +1,5 @@
 import json
+from operator import is_
 from flask import Flask, jsonify, request
 from app import db
 from pymongo import ReturnDocument
@@ -205,6 +206,71 @@ class Playlist:
     
 
 
-    def patch_all():
-        pass
+    def patch_all(self):
+        data = request.get_json()
+        playlistName = data['playlistName']
+        userRequesting = data['userRequesting']
+        _patch_term = list(data.keys())
+        _patch_term.remove('playlistName')
+        _patch_term.remove('userRequesting')
+        patch_term = _patch_term[0]
+        
+        #Check if playlist to interact exists
+        to_patch = db.playlists.find_one({'playlistName': playlistName})
+        if to_patch:
 
+            # Patch comments
+            if patch_term == 'commentSection':
+                old_comments = to_patch[patch_term]
+
+                # check if there is a comment with the same id
+                is_patch = next((x for x in old_comments if x['commentID'] == data[patch_term]['commentID']), False)
+
+                #If has to be patched replace it otherwise add it to the old chapters
+                if is_patch:
+                    index = old_comments.index(is_patch)
+                    old_comments[index] = data[patch_term]
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {patch_term: old_comments}},
+                        return_document = ReturnDocument.AFTER
+                    )
+                else:
+                    old_comments.append(data[patch_term])
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {patch_term: old_comments}},
+                        return_document = ReturnDocument.AFTER
+                    )
+
+            #Patch starts
+            if patch_term == 'userStars':
+                old_ratings = to_patch[patch_term]
+
+                #check if there is a rating with the same useremail
+                is_patch = next((x for x in old_ratings if x['userEmail'] == userRequesting), False)
+
+                #If it has to be patched change the rating otherwise append new rating 
+                if is_patch:
+                    index = old_ratings.index(is_patch)
+                    old_ratings[index] = {'userEmail': userRequesting, 'rating': data[patch_term]}
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {patch_term: old_ratings}},
+                        return_document = ReturnDocument.AFTER
+                    )
+                else:
+                    old_ratings.append({'userEmail': userRequesting, 'rating': data[patch_term]})
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {patch_term: old_ratings}},
+                        return_document = ReturnDocument.AFTER
+                    )
+
+        else:
+            return jsonify({'error': 'No playlist with that name'})
+
+
+        print(playlist, flush=True)
+
+        return jsonify(playlist)
