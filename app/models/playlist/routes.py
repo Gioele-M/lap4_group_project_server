@@ -8,6 +8,12 @@ from models.playlist.models import Playlist
 def get_all():
     return Playlist().showall()
 
+
+@app.route('/playlist/trending')
+def trending():
+    return Playlist().showtrending()
+
+
 #POST
 @app.route('/playlist/new', methods=['POST'])
 def new_playlist():
@@ -21,7 +27,23 @@ def get_by_name():
 
 
 
-#Patch
+#Patch requiring the userRequesting 
 @app.route('/playlist/patch', methods=['PATCH'])
 def patch():
     return Playlist().patch()
+
+#patch for everyone
+@app.route('/playlist/patchall', methods=['PATCH'])
+def patchall():
+    return Playlist().patch_all()
+
+
+#Delete with userRequesting
+@app.route('/playlist/delete', methods=['DELETE'])
+def delete():
+    return Playlist().delete_auth()
+
+
+@app.route('/playlist/deleteall', methods=['DELETE'])
+def deleteall():
+    return Playlist().delete_for_all()

@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    container_name: api_production
+    build:
+      context: .
+    command: bash -c "export FLASK_ENV='development' && pytest --cov-report term-missing --cov=." #pytest-watch
+    ports:
+      - 5000:5000
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app
+    depends_on:
+      - db
+  db:
+    # container_name: db_production
+    image: mongo:latest
+    # logging:
+    #   driver: none
+    hostname: mongodb_production
+    environment:
+      - MONGO_INITDB_DATABASE=wewa
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    volumes:
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    ports:
+      - 27017:27017

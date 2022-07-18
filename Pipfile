@@ -10,12 +10,14 @@ pymongo = {extras = ["srv"], version = "*"}
 gunicorn = "*"
 passlib = "*"
 pyjwt = "*"
+pytest-watch = "*"
 
 [dev-packages]
 pep8 = "*"
 autopep8 = "*"
 pytest = "*"
 pytest-cov = "*"
+pytest-watch = "*"
 
 [requires]
 python_version = "3.10"
@@ -23,7 +25,6 @@ python_version = "3.10"
 [scripts]
 start = "gunicorn wsgi:app"
 dev = "bash -c \"export FLASK_ENV='development' && cd app && flask run\" "
-dev_docker = "docker compose up"
 test = "pytest ."
 coverage = "pytest --cov-report term-missing --cov=. "
 freeze = "pip freeze > requirements.txt"
