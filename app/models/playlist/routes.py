@@ -8,6 +8,12 @@ from models.playlist.models import Playlist
 def get_all():
     return Playlist().showall()
 
+
+@app.route('/playlist/trending')
+def trending():
+    return Playlist().showtrending()
+
+
 #POST
 @app.route('/playlist/new', methods=['POST'])
 def new_playlist():

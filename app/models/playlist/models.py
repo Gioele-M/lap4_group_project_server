@@ -3,7 +3,7 @@ from operator import is_
 from sys import flags
 from flask import Flask, jsonify, request
 from app import db
-from pymongo import ReturnDocument
+from pymongo import ReturnDocument, DESCENDING
 from app import app, db
 import uuid
 
@@ -13,9 +13,16 @@ class Playlist:
     #Temp route
     def showall(self):
         _playlists = db.playlists.find()
-        playlists = [{'playlistName': playlist['playlistName']} for playlist in _playlists]
+        playlists = [playlist for playlist in _playlists]
         return jsonify(playlists)
 
+
+    # Trending route
+    def showtrending(self):
+        _playlists = db.playlists.find().sort(('averageStars.currentRating'), DESCENDING).limit(10)
+        playlists = [playlist for playlist in _playlists]
+        
+        return jsonify(playlists)
 
 
     # POST route
