@@ -1,5 +1,6 @@
 import json
 from operator import is_
+from sys import flags
 from flask import Flask, jsonify, request
 from app import db
 from pymongo import ReturnDocument
@@ -274,3 +275,83 @@ class Playlist:
         print(playlist, flush=True)
 
         return jsonify(playlist)
+
+
+
+    def delete_auth(self):
+        data = request.get_json()
+        playlistName = data['playlistName']
+        userRequesting = data['userRequesting']
+        _delete_term = list(data.keys())
+
+        _delete_term.remove('playlistName')
+        _delete_term.remove('userRequesting')
+        delete_term = _delete_term[0]
+
+        to_delete = db.playlists.find_one({'playlistName': playlistName})
+
+        
+        if to_delete:
+            #check user requesting has editing access
+            # Check if who sent has editing access, else error
+            if to_delete['playlistOwner'] == userRequesting or userRequesting in to_delete['editingAccess']:
+                
+                #Remove tags
+                if delete_term == 'tags':
+                    tags = to_delete[delete_term]
+                    if data[delete_term] not in tags:
+                        return jsonify({'error': 'This tag does not exist'})
+                    tags.remove(data[delete_term])
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {delete_term: tags}},
+                        return_document = ReturnDocument.AFTER
+                    )
+
+                #Remove chapter
+                if delete_term == 'chapters':
+                    chapterN = data[delete_term]
+                    chapters = to_delete[delete_term]
+                    #Check if there is a chapter with the ID to be removed
+                    # check if there is a comment with the same id
+                    is_delete = next((x for x in chapters if x['chapterId'] == chapterN), False)
+                    
+                    if not is_delete:
+                        return jsonify({'error': 'This chapter does not exist'})
+
+                    if not chapterN == len(chapters):
+                        # new_chapters = []
+                        for chapter in chapters:
+                            if chapter['chapterId'] > chapterN:
+                                chapter['chapterId'] -= 1
+
+                        # chapters = [ setattr(x, 'chapterId', x['chapterId']-1)  for x in chapters if x['chapterId'] > chapterN ]
+                    
+                    chapters.remove(is_delete)
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {delete_term: chapters}},
+                        return_document = ReturnDocument.AFTER
+                    )
+
+
+
+
+
+
+            else:
+                return jsonify({'error': 'You do not have editing access for this playlist'})
+
+        else:
+            return jsonify({'error': 'No playlist with that name'})
+
+
+        print(playlist, flush=True)
+
+        return jsonify(playlist)
+
+
+
+
+
+

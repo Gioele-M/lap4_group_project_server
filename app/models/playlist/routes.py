@@ -30,3 +30,10 @@ def patch():
 @app.route('/playlist/patchall', methods=['PATCH'])
 def patchall():
     return Playlist().patch_all()
+
+
+#Delete with userRequesting
+@app.route('/playlist/delete', methods=['DELETE'])
+def delete():
+    return Playlist().delete_auth()
+

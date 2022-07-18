@@ -4,7 +4,7 @@ services:
     container_name: api_production
     build:
       context: .
-    command: bash -c "export FLASK_ENV='development' && pytest --cov-report term-missing --cov=."
+    command: bash -c "export FLASK_ENV='development' && pytest --cov-report term-missing --cov=." #pytest-watch
     ports:
       - 5000:5000
     volumes:
@@ -16,8 +16,8 @@ services:
   db:
     # container_name: db_production
     image: mongo:latest
-    logging:
-      driver: none
+    # logging:
+    #   driver: none
     hostname: mongodb_production
     environment:
       - MONGO_INITDB_DATABASE=wewa
