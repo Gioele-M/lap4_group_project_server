@@ -1,13 +1,13 @@
 users_model = {
     'username': 'Matteo',
     'hashedPassword': 'notsohashed',
-    'userEmail': 'matteo@gmail.com', #primary key
+    'userEmail': 'matteo@gmail.com',  # primary key
     'token': 'token_string',
     'previousTokens': ['token1', 'token2'],
     'lastSelection': [{'selectedNote': 'chapter1', 'selectedPlaylist': 'playlistName'}],
     'recentPlaylist': [
         'playlist1'
-        ],
+    ],
     'favourites': ['playlistNameX', 'playlistNameY'],
     'achievement': ['badgeX', 'badgeY']
 }
@@ -31,7 +31,7 @@ playlist_model = {
     ],
     'commentSection': [
         {
-            'commentID': 1, #sequential
+            'commentID': 1,  # sequential
             'timestamp': '00.00.00.10.05.22',
             'username': 'Matteo',
             'userEmail': 'matteo@gmail.com',
@@ -43,7 +43,7 @@ playlist_model = {
                     'userEmail': 'gioele@gmail.com',
                     'reply': 'great indeed!'
                 },
-                {   
+                {
                     'timestamp': '00.00.00.10.05.22',
                     'username': 'Igor',
                     'userEmail': 'igor@gmail.com',
@@ -63,7 +63,7 @@ playlist_model = {
                 'text': 'This is the section with the notes on the first chapter'
             }
 
-            
+
         }
     ]
 }
@@ -88,7 +88,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -100,7 +100,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -112,15 +112,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -142,7 +139,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -154,7 +151,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -166,15 +163,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -196,7 +190,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -208,7 +202,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -220,15 +214,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -250,7 +241,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -262,7 +253,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -274,15 +265,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -304,7 +292,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -316,7 +304,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -328,15 +316,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -358,7 +343,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -370,7 +355,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -382,15 +367,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -412,7 +394,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -424,7 +406,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -436,15 +418,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -466,7 +445,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -478,7 +457,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -490,15 +469,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -520,7 +496,7 @@ trending_topics = [
         ],
         'commentSection': [
             {
-                'commentID': 1, #sequential
+                'commentID': 1,  # sequential
                 'timestamp': '00.00.00.10.05.22',
                 'username': 'Matteo',
                 'userEmail': 'matteo@gmail.com',
@@ -532,7 +508,7 @@ trending_topics = [
                         'userEmail': 'gioele@gmail.com',
                         'reply': 'great indeed!'
                     },
-                    {   
+                    {
                         'timestamp': '00.00.00.10.05.22',
                         'username': 'Igor',
                         'userEmail': 'igor@gmail.com',
@@ -544,15 +520,12 @@ trending_topics = [
         ],
         'chapters': [
             {
-                'chapter1': {
-                    'chapterTitle': 'first chapter',
-                    'video_url': 'https://www.youtube.com/watch?v=7Q17ubqLfaM',
-                    'start': '0.00',
-                    'end': '0.30',
-                    'text': 'This is the section with the notes on the first chapter'
-                }
-
-                
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'video_url': 'youtube.com',
+                'start': '0.00',
+                'end': '0.30',
+                'text': 'This is the section with the notes on the first chapter'
             }
         ]
     },
@@ -577,9 +550,6 @@ trending_topics = [
 ]
 
 
-
-
-
 # result = db.users.insert_many(([
 #     {
 #         "username": 'Matteo',
@@ -597,4 +567,3 @@ trending_topics = [
 #         "password": "pass"
 #     },
 # ]))
-

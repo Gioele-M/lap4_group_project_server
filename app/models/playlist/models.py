@@ -167,6 +167,9 @@ class Playlist:
                 # Check how to fix if deleting
                 if patch_term == 'chapters':
                     old_chapters = to_patch[patch_term]
+
+                    #Check if it has same title 
+
                     old_chapters.append({f'chapter{len(old_chapters)+1}': data[patch_term]})
 
                     playlist = db.playlists.find_one_and_update(
