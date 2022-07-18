@@ -203,3 +203,8 @@ class Playlist:
         return jsonify(playlist)
         
     
+
+
+    def patch_all():
+        pass
+
