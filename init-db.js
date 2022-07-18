@@ -108,15 +108,16 @@ db.playlists.insertMany(
         }
     ],
     'chapters': [
-        {
-            'chapter1': {
-                'chapterTitle': 'first chapter',
-                'video_url': 'youtube.com',
-                'start': '0.00',
-                'end': '0.30',
-                'text': 'This is the section with the notes on the first chapter'
-            }            
-        }
+        
+      {
+        'chapterId': 1,
+        'chapterTitle': 'first chapter',
+        'video_url': 'youtube.com',
+        'start': '0.00',
+        'end': '0.30',
+        'text': 'This is the section with the notes on the first chapter'
+      }            
+        
     ]
   }
   ,
@@ -161,15 +162,14 @@ db.playlists.insertMany(
         }
     ],
     'chapters': [
-        {
-            'chapter1': {
-                'chapterTitle': 'first chapter',
-                'video_url': 'youtube.com',
-                'start': '0.00',
-                'end': '0.30',
-                'text': 'This is the section with the notes on the first chapter'
-            } 
-        }
+      {
+        'chapterId': 1,
+        'chapterTitle': 'first chapter',
+        'video_url': 'youtube.com',
+        'start': '0.00',
+        'end': '0.30',
+        'text': 'This is the section with the notes on the first chapter'
+      }   
     ]
   }
   ,
