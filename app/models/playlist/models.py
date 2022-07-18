@@ -168,15 +168,27 @@ class Playlist:
                 if patch_term == 'chapters':
                     old_chapters = to_patch[patch_term]
 
-                    #Check if it has same title 
+                    #Check if it has chapter with same id
+                    #is_patch = any(x['chapterId'] == data[patch_term]['chapterId'] for x in old_chapters)
+                    is_patch = next((x for x in old_chapters if x['chapterId'] == data[patch_term]['chapterId']), False)
 
-                    old_chapters.append({f'chapter{len(old_chapters)+1}': data[patch_term]})
-
-                    playlist = db.playlists.find_one_and_update(
+                    #if it has to be patched replace it otherwise add it to the old chapters
+                    if is_patch:
+                        index = old_chapters.index(is_patch)
+                        old_chapters[index] = data[patch_term]
+                        playlist = db.playlists.find_one_and_update(
                             {'playlistName': playlistName},
                             {'$set': {patch_term: old_chapters}},
                             return_document = ReturnDocument.AFTER
                             )
+                    else:
+                        old_chapters.append(data[patch_term])
+
+                        playlist = db.playlists.find_one_and_update(
+                                {'playlistName': playlistName},
+                                {'$set': {patch_term: old_chapters}},
+                                return_document = ReturnDocument.AFTER
+                                )
                     
             
             else:
