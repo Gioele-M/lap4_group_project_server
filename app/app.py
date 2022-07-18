@@ -1,5 +1,4 @@
 from crypt import methods
-import imp
 import pprint
 import re
 from flask import Flask, request, jsonify, session
@@ -9,7 +8,7 @@ import os
 from functools import wraps
 import jwt
 
-from temp.sample_data import users_model, playlist_model
+from temp.sample_data import users_model, playlist_model, trending_topics
 
 app = Flask(__name__)
 # app.secret_key = 'secretkeyforsession'
@@ -112,6 +111,10 @@ def find_all():
 
     return jsonify({'users': users}), 200
 
+
+@app.route('/temptrending')
+def temp_trending():
+    return jsonify(trending_topics)
 
 
 @app.route('/protected', methods=['POST'])
