@@ -85,6 +85,7 @@ class Playlist:
         
 
 
+    #Patch endpoints
     def patch(self):
         data = request.get_json()
         playlistName = data['playlistName']
@@ -92,6 +93,7 @@ class Playlist:
         _patch_term.remove('playlistName')
         patch_term = _patch_term[0]
         
+        # Patch accessibility
         if patch_term == 'public':
             if data[patch_term] == 'True' or data[patch_term] == 'False':
                 playlist = db.playlists.find_one_and_update(
@@ -101,6 +103,30 @@ class Playlist:
                     )
             else:
                 return jsonify({'error': 'You have to set public as either True or False (string)'})
+
+        # Patch playlist name
+        if patch_term == 'newName':
+            if db.playlists.find_one({'playlistName': data[patch_term]}):
+                return jsonify({'error': 'Playlist name already in use'}), 406
+            
+            playlist = db.playlists.find_one_and_update(
+                    {'playlistName': playlistName},
+                    {'$set': {'playlistName': data[patch_term]}},
+                    return_document = ReturnDocument.AFTER
+                    )
+            #find if the name is already used
+            
+        
+        # Patch theme
+        if patch_term == 'playlistTheme':
+            pass
+
+
+        # Patch tags 
+        if patch_term == 'tags':
+            pass
+
+
 
 
         print(playlist, flush=True)
