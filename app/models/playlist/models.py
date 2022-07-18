@@ -254,22 +254,48 @@ class Playlist:
                 #If it has to be patched change the rating otherwise append new rating 
                 if is_patch:
                     index = old_ratings.index(is_patch)
+                    old_stars = old_ratings[index]['rating']
                     old_ratings[index] = {'userEmail': userRequesting, 'rating': data[patch_term]}
-                    playlist = db.playlists.find_one_and_update(
-                        {'playlistName': playlistName},
-                        {'$set': {patch_term: old_ratings}},
-                        return_document = ReturnDocument.AFTER
-                    )
-                else:
-                    old_ratings.append({'userEmail': userRequesting, 'rating': data[patch_term]})
+
+                    #set average stars
+                    average_stars = to_patch['averageStars']
+                    average_stars['totalStars'] += data[patch_term] - old_stars
+                    average_stars['currentRating'] = average_stars['totalStars'] / average_stars['totalRatings']
+
+
                     playlist = db.playlists.find_one_and_update(
                         {'playlistName': playlistName},
                         {'$set': {patch_term: old_ratings}},
                         return_document = ReturnDocument.AFTER
                     )
 
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {'averageStars': average_stars}}, 
+                        return_document = ReturnDocument.AFTER
+                    )
+                else:
+                    old_ratings.append({'userEmail': userRequesting, 'rating': data[patch_term]})
+
+                    #set average stars
+                    average_stars = to_patch['averageStars']
+                    average_stars['totalStars'] += data[patch_term]
+                    average_stars['totalRatings'] += 1
+                    average_stars['currentRating'] = average_stars['totalStars'] / average_stars['totalRatings']
+                    
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {patch_term: old_ratings}},
+                        return_document = ReturnDocument.AFTER
+                    )
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {'averageStars': average_stars}}, 
+                        return_document = ReturnDocument.AFTER
+                    )
+
         else:
-            return jsonify({'error': 'No playlist with that name'})
+            return jsonify({'error': 'No playlist with that name'}), 406
 
 
         print(playlist, flush=True)
@@ -300,7 +326,7 @@ class Playlist:
                 if delete_term == 'tags':
                     tags = to_delete[delete_term]
                     if data[delete_term] not in tags:
-                        return jsonify({'error': 'This tag does not exist'})
+                        return jsonify({'error': 'This tag does not exist'}), 406
                     tags.remove(data[delete_term])
                     playlist = db.playlists.find_one_and_update(
                         {'playlistName': playlistName},
@@ -317,15 +343,13 @@ class Playlist:
                     is_delete = next((x for x in chapters if x['chapterId'] == chapterN), False)
                     
                     if not is_delete:
-                        return jsonify({'error': 'This chapter does not exist'})
+                        return jsonify({'error': 'This chapter does not exist'}), 406
 
                     if not chapterN == len(chapters):
-                        # new_chapters = []
                         for chapter in chapters:
                             if chapter['chapterId'] > chapterN:
                                 chapter['chapterId'] -= 1
 
-                        # chapters = [ setattr(x, 'chapterId', x['chapterId']-1)  for x in chapters if x['chapterId'] > chapterN ]
                     
                     chapters.remove(is_delete)
                     playlist = db.playlists.find_one_and_update(
@@ -335,22 +359,118 @@ class Playlist:
                     )
 
 
+                #Remove playlist
+                if delete_term == 'playlist':
+                    if to_delete['playlistOwner'] != userRequesting:
+                        return jsonify({'error': 'Only owners can delete playlists!'}), 403
+                    
+                    playlist = db.playlists.delete_one({'playlistName': playlistName})
+                    return jsonify({'message': 'Playlist deleted'}), 404
 
 
 
 
             else:
-                return jsonify({'error': 'You do not have editing access for this playlist'})
+                return jsonify({'error': 'You do not have editing access for this playlist'}), 403
 
         else:
-            return jsonify({'error': 'No playlist with that name'})
+            return jsonify({'error': 'No playlist with that name'}), 404
 
 
         print(playlist, flush=True)
 
-        return jsonify(playlist)
+        return jsonify(playlist), 200
 
 
+
+
+    def delete_for_all(self):
+        data = request.get_json()
+        playlistName = data['playlistName']
+        userRequesting = data['userRequesting']
+        _delete_term = list(data.keys())
+
+        _delete_term.remove('playlistName')
+        _delete_term.remove('userRequesting')
+        delete_term = _delete_term[0]
+
+        to_delete = db.playlists.find_one({'playlistName': playlistName})
+
+        
+        if to_delete:
+
+            if delete_term == 'thread':
+                #Check if user has comment in thread
+                comments = to_delete['commentSection']
+
+                comment_requested = next((x for x in comments if x['commentID'] == data[delete_term]), False)
+
+                if comment_requested:
+                    deleted = False
+                    for thread in comment_requested['thread']:
+                        if thread['userEmail'] == userRequesting:
+                            index = comment_requested['thread'].index(thread)
+                            print(comment_requested['thread'], flush=True)
+                            comment_requested['thread'].pop(index)
+                            deleted = True
+                    
+                    if not deleted:
+                        return jsonify({'error': 'No comment from this user in this thread'}), 404
+                    
+                    # Repack object to send
+                    for x in comments:
+                        if x['commentID'] == data[delete_term]:
+                            x = comment_requested['thread']
+
+                    
+                    playlist = db.playlists.find_one_and_update(
+                        {'playlistName': playlistName},
+                        {'$set': {'commentSection': comments}},
+                        return_document = ReturnDocument.AFTER
+                    )
+
+                else:
+                    return jsonify({'error': 'No comment in this thread'}), 404
+
+
+            if delete_term == 'comment':
+                #check if user has comment in playlist at numbered position
+                comments = to_delete['commentSection']
+                comment_to_delete = next((x for x in comments if x['commentID'] == data[delete_term]), False)
+                id_to_delete = comment_to_delete['commentID']
+                if comment_to_delete:
+                    #check the user creating is the same as the one deleting
+                    if comment_to_delete['userEmail'] == userRequesting:
+                        index = comments.index(comment_to_delete)
+                        comments.pop(index)
+
+                        if not id_to_delete == len(comments):
+                            for comment in comments:
+                                if comment['commentID'] > id_to_delete:
+                                    comment['commentID'] -= 1
+
+
+                        playlist = db.playlists.find_one_and_update(
+                            {'playlistName': playlistName},
+                            {'$set': {'commentSection': comments}},
+                            return_document = ReturnDocument.AFTER
+                        )
+                    else:
+                        return jsonify({'error': "You cannot delete someone else's comment"}), 403
+
+
+                else:
+                    return jsonify({'error': 'Comment not found'}), 404
+
+
+
+        else:
+            return jsonify({'error': 'No playlist with that name'}), 404
+
+
+        print(playlist, flush=True)
+
+        return jsonify(playlist), 200
 
 
 

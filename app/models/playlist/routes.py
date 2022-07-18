@@ -37,3 +37,7 @@ def patchall():
 def delete():
     return Playlist().delete_auth()
 
+
+@app.route('/playlist/deleteall', methods=['DELETE'])
+def deleteall():
+    return Playlist().delete_for_all()
