@@ -4,7 +4,7 @@ from sys import flags
 from flask import Flask, jsonify, request
 from app import db
 from pymongo import ReturnDocument, DESCENDING
-from app import app, db
+from app import app, db, token_required
 import uuid
 
 
@@ -26,6 +26,7 @@ class Playlist:
 
 
     # POST route
+    #@token_required
     def create_playlist(self):
         data = request.get_json()
 
@@ -95,6 +96,7 @@ class Playlist:
 
 
     #Patch endpoints
+    #@token_required
     def patch(self):
         data = request.get_json()
         playlistName = data['playlistName']
@@ -102,6 +104,7 @@ class Playlist:
         _patch_term = list(data.keys())
         _patch_term.remove('playlistName')
         _patch_term.remove('userRequesting')
+        _patch_term.remove('token')
         patch_term = _patch_term[0]
         
         #Check if playlist to interact exists
@@ -213,7 +216,7 @@ class Playlist:
         
     
 
-
+    #@token_required
     def patch_all(self):
         data = request.get_json()
         playlistName = data['playlistName']
@@ -221,6 +224,7 @@ class Playlist:
         _patch_term = list(data.keys())
         _patch_term.remove('playlistName')
         _patch_term.remove('userRequesting')
+        _patch_term.remove('token')
         patch_term = _patch_term[0]
         
         #Check if playlist to interact exists
@@ -310,7 +314,7 @@ class Playlist:
         return jsonify(playlist)
 
 
-
+    #@token_required
     def delete_auth(self):
         data = request.get_json()
         playlistName = data['playlistName']
@@ -319,6 +323,7 @@ class Playlist:
 
         _delete_term.remove('playlistName')
         _delete_term.remove('userRequesting')
+        _delete_term.remove('token')
         delete_term = _delete_term[0]
 
         to_delete = db.playlists.find_one({'playlistName': playlistName})
@@ -390,7 +395,7 @@ class Playlist:
 
 
 
-
+    #@token_required
     def delete_for_all(self):
         data = request.get_json()
         playlistName = data['playlistName']
@@ -399,6 +404,7 @@ class Playlist:
 
         _delete_term.remove('playlistName')
         _delete_term.remove('userRequesting')
+        _delete_term.remove('token')
         delete_term = _delete_term[0]
 
         to_delete = db.playlists.find_one({'playlistName': playlistName})
