@@ -4,7 +4,7 @@ from passlib.hash import pbkdf2_sha256
 from pymongo import ReturnDocument
 import jwt
 import datetime
-from app import app, db
+from app import app, db, token_required
 
 
 class User:
@@ -78,7 +78,7 @@ class User:
     #     session.clear()
     #     return jsonify({'message': 'signed out'})
 
-
+    @token_required
     def update_favourites(self):
         data = request.get_json()
         new_fav = data['favourite']
