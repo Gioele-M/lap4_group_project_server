@@ -108,55 +108,107 @@ trending_topics = [
             }
         ],
         'chapters': [
-            {
-                'chapterId': 1,
-                'chapterTitle': 'Why containers are useful',
-                'video_url': 'https://www.youtube.com/watch?v=_dfLOzuIg2o',
-                'start': '0.00',
-                'end': '1.30',
-                'text': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            },
-            {
-                'chapterId': 2,
-                'chapterTitle': 'Introduction to containers',
-                'video_url': 'https://www.youtube.com/watch?v=cjXI-yxqGTI',
-                'start': '1.00',
-                'end': '4.30',
-                'text': 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.'
-            },
-            {
-                'chapterId': 3,
-                'chapterTitle': 'Second part of containers',
-                'video_url': 'https://www.youtube.com/watch?v=pxwUXJmAER4',
-                'start': '5.00',
-                'end': '8.30',
-                'text': "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-            },
-            {
-                'chapterId': 4,
-                'chapterTitle': 'Introduction to docker',
-                'video_url': 'https://www.youtube.com/watch?v=eGz9DS-aIeY',
-                'start': '1.00',
-                'end': '4.30',
-                'text': 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'
-            },
-            {
-                'chapterId': 5,
-                'chapterTitle': 'Usage of docker',
-                'video_url': 'https://www.youtube.com/watch?v=XCWWPpfdbsM',
-                'start': '0.00',
-                'end': '3.30',
-                'text': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
-            },
-            {
-                'chapterId': 6,
-                'chapterTitle': 'Conclusions',
-                'video_url': 'https://www.youtube.com/watch?v=mRMmlo_Uqcs',
-                'start': '5.00',
-                'end': '6.30',
-                'text': 'All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.'
-            }
-        ]
+      
+      {
+        "uuid": "c1db01dce06d4088b65b21as3536d81c",
+        'chapterId': 1,
+        "chapterTitle": "HTML tags",
+        "start": "20.24",
+        "end": "25.40",
+        "text": "What are some basic HTML (HyperText Markup Language) tags and how do you start writing HTML",
+        "video_url": "https://www.youtube.com/watch?v=qz0aGYrrlhU"
+    },
+
+    {
+      "uuid": "c1db01dce02d4088b65b21a43536d81c",
+      'chapterId': 2,
+        "chapterTitle": "What is CSS",
+        "start": "00.25",
+        "end": "01.15",
+        "text": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages. HTML provides the structure of the page, CSS the (visual and aural) layout, for a variety of devices.",
+        "video_url": "https://www.youtube.com/watch?v=1PnVor36_40"
+    },
+
+    {
+      "uuid": "c1db01dce02d4088b65b21a43536d8vc",
+      'chapterId': 3,
+        "chapterTitle": "Javascript Summary",
+        "start": "00.00",
+        "end": "02.35",
+        "text": "JavaScript is the the programming language that built the web. Learn how it evolved into a powerful tool for building websites, servers with Node.js, mobile apps, desktop software, and more.",
+        "video_url": "https://www.youtube.com/watch?v=DHjqpvDnNGE"
+    },
+
+    {
+      "uuid": "c1db11dce02d4088b65b21a43536d8vc",
+      'chapterId': 4,
+        "chapterTitle": "Remote APIs",
+        "start": "12.55",
+        "end": "17.03",
+        "text": "What is the benefit of using Remote APIs",
+        "video_url": "https://www.youtube.com/watch?v=GZvSYJDk-us"
+    },
+
+      {
+        "uuid": "12db01dce02d4088b65b21a43536d8vc",
+        'chapterId': 5,
+        "chapterTitle": "Software Testing",
+        "start": "03.29",
+        "end": "06.00",
+        "text": "Software testing is defined as an activity to check whether the actual results match the expected results and to ensure that the software system is defect free.",
+        "video_url": "https://www.youtube.com/watch?v=sO8eGL6SFsA"
+    },
+
+     {
+      "uuid": "c1db01dc202d4088b65b21a43536d8vc",
+      'chapterId': 6,
+        "chapterTitle": "React",
+        "start": "00.57",
+        "end": "02.43",
+        "text": "What are the essentials that you need to know to start a react app?",
+        "video_url": "https://www.youtube.com/watch?v=hQAHSlTtcmY"
+    },
+
+         {
+          "uuid": "c1db01dc702d4088b65b21a43536d8vc",
+          'chapterId': 7,
+        "chapterTitle": "Redux",
+        "start": "00.17",
+        "end": "00.25",
+        "text": "Redux is a pattern and library that helps developers implement complex state management requirements at scale",
+        "video_url": "https://www.youtube.com/watch?v=_shA5Xwe8_4"
+    },
+             {
+              "uuid": "c1db01dce02d4088b65b21a43536b8vc",
+              'chapterId': 8,
+        "chapterTitle": "Python Lists",
+        "start": "17.40",
+        "end": "24.14",
+        "text": "Lists are used to store multiple items in a single variable.Lists are one of 4 built-in data types in Python used to store collections of data, the other 3 are Tuple, Set, and Dictionary, all with different qualities and usage.Lists are created using square brackets",
+        "video_url": "https://www.youtube.com/watch?v=JJmcL1N2KQs&t=861s"
+    },
+
+             {
+              "uuid": "c1db01dce02d4n88b65b21a43536d8vc",
+              'chapterId': 9,
+        "chapterTitle": "How do I use a Docker Container",
+        "start": "7.12",
+        "end": "08.51",
+        "text": "Docker website with info on docker containers:https://www.docker.com/resources/what-container/",
+        "video_url": "https://www.youtube.com/watch?v=gAkwW2tuIqE"
+    },
+
+          {
+            "uuid": "c1db01dwe02d4088b65b21a43536d8vc",
+            'chapterId': 10,
+        "chapterTitle": "Flask vs Django",
+        "start": "00.00",
+        "end": "01.30",
+        "text": "Django, on the one hand, is a full-stack web framework, whereas Flask is a light-weight, extensible framework. If you want to dig more into coding and learn core concepts, Flask helps you understand how each component from the back-end works to get a simple web application up and running",
+        "video_url": "https://www.youtube.com/watch?v=3vfum74ggHE"
+    }
+        
+    ]
     },
     {
         'playlistName': 'playlistB',

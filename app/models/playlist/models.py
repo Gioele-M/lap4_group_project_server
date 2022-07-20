@@ -46,6 +46,7 @@ class Playlist:
             'userStars': [],
             'commentSection': [],
             'chapters': [{
+                "uuid": uuid.uuid4().hex,
                 'chapterId': 1,
                 'chapterTitle': 'first chapter',
                 'end': '0.00',
@@ -212,6 +213,7 @@ class Playlist:
                             return_document = ReturnDocument.AFTER
                             )
                     else:
+                        data[patch_term]['uuid'] = uuid.uuid4().hex
                         old_chapters.append(data[patch_term])
 
                         playlist = db.playlists.find_one_and_update(

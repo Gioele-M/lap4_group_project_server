@@ -108,15 +108,6 @@ db.playlists.insertMany(
         }
     ],
     'chapters': [
-        
-      // {
-      //   'chapterId': 1,
-      //   'chapterTitle': 'first chapter',
-      //   'video_url': 'youtube.com',
-      //   'start': '0.00',
-      //   'end': '0.30',
-      //   'text': 'This is the section with the notes on the first chapter'
-      // }
       
       {
         "uuid": "c1db01dce06d4088b65b21as3536d81c",
@@ -236,6 +227,7 @@ db.playlists.insertMany(
     'commentSection': [],
     'chapters': [
       {
+        "uuid": "c1db01dce02d4088b65b21a43b36d8vc",
         'chapterId': 1,
         "chapterTitle": "HTML tags",
         "start": "20.24",
@@ -262,6 +254,7 @@ db.playlists.insertMany(
     'userStars': [],
     'commentSection': [],
     'chapters': [{
+      "uuid": "c1db01dce02d4s88b65b21a43536d8vc",
       'chapterId': 1,
       "chapterTitle": "HTML tags",
       "start": "20.24",
@@ -313,6 +306,7 @@ db.playlists.insertMany(
     ],
     'chapters': [
       {
+        "uuid": "c1dn01dce02d4088b65b21a43536d8vc",
         'chapterId': 1,
         'chapterTitle': 'first chapter',
         'video_url': 'youtube.com',
