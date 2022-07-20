@@ -45,7 +45,14 @@ class Playlist:
             },
             'userStars': [],
             'commentSection': [],
-            'chapters': []
+            'chapters': [{
+                'chapterId': 1,
+                'chapterTitle': 'first chapter',
+                'end': '0.00',
+                'start': '0.00',
+                'text': 'Starting',
+                'video_url': 'youtube.com',
+            }]
         }
 
         #Chack if playlist name already exists
@@ -99,6 +106,7 @@ class Playlist:
     #@token_required
     def patch(self):
         data = request.get_json()
+        print(data, flush=True)
         playlistName = data['playlistName']
         userRequesting = data['userRequesting']
         _patch_term = list(data.keys())
