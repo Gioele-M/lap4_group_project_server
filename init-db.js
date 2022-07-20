@@ -119,6 +119,7 @@ db.playlists.insertMany(
       // }
       
       {
+        "uuid": "c1db01dce06d4088b65b21as3536d81c",
         'chapterId': 1,
         "chapterTitle": "HTML tags",
         "start": "20.24",
@@ -128,6 +129,7 @@ db.playlists.insertMany(
     },
 
     {
+      "uuid": "c1db01dce02d4088b65b21a43536d81c",
       'chapterId': 2,
         "chapterTitle": "What is CSS",
         "start": "00.25",
@@ -137,6 +139,7 @@ db.playlists.insertMany(
     },
 
     {
+      "uuid": "c1db01dce02d4088b65b21a43536d8vc",
       'chapterId': 3,
         "chapterTitle": "Javascript Summary",
         "start": "00.00",
@@ -146,6 +149,7 @@ db.playlists.insertMany(
     },
 
     {
+      "uuid": "c1db11dce02d4088b65b21a43536d8vc",
       'chapterId': 4,
         "chapterTitle": "Remote APIs",
         "start": "12.55",
@@ -155,6 +159,7 @@ db.playlists.insertMany(
     },
 
       {
+        "uuid": "12db01dce02d4088b65b21a43536d8vc",
         'chapterId': 5,
         "chapterTitle": "Software Testing",
         "start": "03.29",
@@ -164,6 +169,7 @@ db.playlists.insertMany(
     },
 
      {
+      "uuid": "c1db01dc202d4088b65b21a43536d8vc",
       'chapterId': 6,
         "chapterTitle": "React",
         "start": "00.57",
@@ -173,6 +179,7 @@ db.playlists.insertMany(
     },
 
          {
+          "uuid": "c1db01dc702d4088b65b21a43536d8vc",
           'chapterId': 7,
         "chapterTitle": "Redux",
         "start": "00.17",
@@ -181,6 +188,7 @@ db.playlists.insertMany(
         "video_url": "https://www.youtube.com/watch?v=_shA5Xwe8_4"
     },
              {
+              "uuid": "c1db01dce02d4088b65b21a43536b8vc",
               'chapterId': 8,
         "chapterTitle": "Python Lists",
         "start": "17.40",
@@ -190,6 +198,7 @@ db.playlists.insertMany(
     },
 
              {
+              "uuid": "c1db01dce02d4n88b65b21a43536d8vc",
               'chapterId': 9,
         "chapterTitle": "How do I use a Docker Container",
         "start": "7.12",
@@ -199,6 +208,7 @@ db.playlists.insertMany(
     },
 
           {
+            "uuid": "c1db01dwe02d4088b65b21a43536d8vc",
             'chapterId': 10,
         "chapterTitle": "Flask vs Django",
         "start": "00.00",
@@ -208,6 +218,57 @@ db.playlists.insertMany(
     }
         
     ]
+  },
+  {
+    "_id": "b49a866d572d45f0bed20c43aa40884b",
+    'playlistName': 'playlistM',
+    'playlistOwner': 'matteo@gmail.com',
+    'editingAccess': [],
+    'public': 'True',
+    'playlistTheme': '(0,0,0)',
+    'tags': [],
+    'averageStars': {
+        'currentRating': 0,
+        'totalStars': 0,
+        'totalRatings': 0
+    },
+    'userStars': [],
+    'commentSection': [],
+    'chapters': [
+      {
+        'chapterId': 1,
+        "chapterTitle": "HTML tags",
+        "start": "20.24",
+        "end": "25.40",
+        "text": "What are some basic HTML (HyperText Markup Language) tags and how do you start writing HTML",
+        "video_url": "https://www.youtube.com/watch?v=qz0aGYrrlhU"
+    }
+    ]
+  }
+  ,
+  {
+    "_id": "b49a866d572d45f0bed20s43ea40884b",
+    'playlistName': 'playlistZ',
+    'playlistOwner': 'matteo@gmail.com',
+    'editingAccess': [],
+    'public': 'True',
+    'playlistTheme': '(0,0,0)',
+    'tags': [],
+    'averageStars': {
+        'currentRating': 0,
+        'totalStars': 0,
+        'totalRatings': 0
+    },
+    'userStars': [],
+    'commentSection': [],
+    'chapters': [{
+      'chapterId': 1,
+      "chapterTitle": "HTML tags",
+      "start": "20.24",
+      "end": "25.40",
+      "text": "What are some basic HTML (HyperText Markup Language) tags and how do you start writing HTML",
+      "video_url": "https://www.youtube.com/watch?v=qz0aGYrrlhU"
+  }]
   }
   ,
   {
