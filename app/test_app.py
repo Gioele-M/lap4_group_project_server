@@ -20,12 +20,40 @@ class TestPlaylistRoutes():
     def test_create_playlist(self, api):
         res = api.post('/playlist/new', json={
             "email": "gio@gio.com",
-            "playlistName": "NewPlsaylist"
+            "playlistName": "NewPlaylist"
             })
-
         print(res.data)
-        assert res.status == '200 OK'        
+        assert res.status == '200 OK'
+        assert b'NewPlaylist' in res.data 
 
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def test_delete_playlist(self, api):
+        res = api.delete('/playlist/delete', json={
+            "userRequesting": "gio@gio.com",
+            "playlistName": "NewPlaylist",
+            "playlist": "True",
+            "token": "xxx"
+        })
+        print(res.data)
+        assert res.status == '404 NOT FOUND'
+        assert b"Playlist deleted" in res.data
 
     
 

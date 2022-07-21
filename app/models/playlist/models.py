@@ -196,11 +196,12 @@ class Playlist:
                 ###### This is the old way where the user sent only one chapter
                 # Do we want to patch the chapter changing stuff in it?
                 # Check how to fix if deleting
+
+                
                 if patch_term == 'chapters':
                     old_chapters = to_patch[patch_term]
 
                     #Check if it has chapter with same id
-                    #is_patch = any(x['chapterId'] == data[patch_term]['chapterId'] for x in old_chapters)
                     is_patch = next((x for x in old_chapters if x['chapterId'] == data[patch_term]['chapterId']), False)
 
                     #if it has to be patched replace it otherwise add it to the old chapters
