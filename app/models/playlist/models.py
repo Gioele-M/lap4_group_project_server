@@ -19,7 +19,7 @@ class Playlist:
 
     # Trending route
     def showtrending(self):
-        _playlists = db.playlists.find().sort(('averageStars.currentRating'), DESCENDING).limit(10)
+        _playlists = db.playlists.find().sort(('averageStars.currentRating'), DESCENDING).limit(5)
         playlists = [playlist for playlist in _playlists]
         
         return jsonify(playlists)

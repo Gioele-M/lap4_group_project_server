@@ -21,13 +21,11 @@ def token_required(f):
     def wrap(*args, **kwargs):
         data = request.get_json()
         token = data['token']
-
         if not token:
             return jsonify({'message': 'Token is missing'}), 403
         try:
             authorised = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])    
         except Exception as e:
-            print(e, flush=True)
             return jsonify({'message': 'Token is invalid'}), 498
         return f(*args, **kwargs)
     return wrap
