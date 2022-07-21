@@ -21,6 +21,6 @@ def login():
 
 
 @app.route('/user/favourites', methods=['PATCH'])
-@token_required
+# @token_required
 def update_favourites():
     return User().update_favourites()

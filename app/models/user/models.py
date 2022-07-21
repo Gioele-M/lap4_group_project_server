@@ -78,7 +78,7 @@ class User:
     #     session.clear()
     #     return jsonify({'message': 'signed out'})
 
-    @token_required
+    # @token_required
     def update_favourites(self):
         data = request.get_json()
         new_fav = data['favourite']

@@ -73,6 +73,8 @@ class Playlist:
     def search_by(self):
         data = request.get_json()
         search_term = list(data.keys())[0]
+
+        _playlists = False
         
         if search_term == 'playlistName':
             _playlists = db.playlists.find(
@@ -94,7 +96,7 @@ class Playlist:
             playlists = [playlist for playlist in _playlists]
             return jsonify(playlists)
 
-        return jsonify({'error': 'Playlist not found'})
+        return jsonify({'error': 'Playlist not found'}),404
         
 
 
@@ -156,7 +158,7 @@ class Playlist:
                 if patch_term == 'tags':
                     old_tags = to_patch['tags']
                     if data[patch_term] in old_tags:
-                        return jsonify({'error': 'Tag already present'})
+                        return jsonify({'error': 'Tag already present'}), 401
                     old_tags.append(data[patch_term])
                     playlist = db.playlists.find_one_and_update(
                             {'playlistName': playlistName},

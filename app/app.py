@@ -8,7 +8,7 @@ import os
 from functools import wraps
 import jwt
 
-from temp.sample_data import users_model, playlist_model, trending_topics
+# from temp.sample_data import users_model, playlist_model, trending_topics
 
 app = Flask(__name__)
 # app.secret_key = 'secretkeyforsession'
@@ -84,44 +84,44 @@ from models.playlist import routes
 def home():
     return 'this works'
 
-@app.route('/userSample', methods=['GET'])
-def user_sample():
-    return users_model, 200
+# @app.route('/userSample', methods=['GET'])
+# def user_sample():
+#     return users_model, 200
 
 
-@app.route('/playlistSample')
-def playlist_sample():
-    return playlist_model, 200
+# @app.route('/playlistSample')
+# def playlist_sample():
+#     return playlist_model, 200
 
 
 
 
-@app.route('/allusers')
-# @login_required
-def find_all():
+# @app.route('/allusers')
+# # @login_required
+# def find_all():
         
-    _users = db.users.find()
+#     _users = db.users.find()
 
 
-    users = [{'username': user['username']} for user in _users]
+#     users = [{'username': user['username']} for user in _users]
 
-    return jsonify({'users': users}), 200
-
-
-@app.route('/temptrending')
-def temp_trending():
-    return jsonify(trending_topics)
+#     return jsonify({'users': users}), 200
 
 
-@app.route('/protected', methods=['POST'])
-@token_required
-def protected():
-    return 'you have access to this'
+# @app.route('/temptrending')
+# def temp_trending():
+#     return jsonify(trending_topics)
 
 
-@app.route('/unprotected')
-def unprotected():
-    return 'Access'
+# @app.route('/protected', methods=['POST'])
+# @token_required
+# def protected():
+#     return 'you have access to this'
+
+
+# @app.route('/unprotected')
+# def unprotected():
+#     return 'Access'
 
 
 
