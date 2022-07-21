@@ -69,11 +69,6 @@ class Playlist:
 
 
     # 'GET' routes
-    def show_trending(self):
-        pass
-        #Need to decide how to rank/make a couple 
-        #Order based on averageStar.currentRating, retrieve n max
-
 
     def search_by(self):
         data = request.get_json()
@@ -133,7 +128,7 @@ class Playlist:
                             return_document = ReturnDocument.AFTER
                             )
                     else:
-                        return jsonify({'error': 'You have to set public as either True or False (string)'})
+                        return jsonify({'error': 'You have to set public as either True or False (string)'}), 401
 
                 # Patch playlist name
                 if patch_term == 'newName':
@@ -229,10 +224,10 @@ class Playlist:
 
             
             else:
-                return jsonify({'error': 'You do not have editing access for this playlist'})
+                return jsonify({'error': 'You do not have editing access for this playlist'}), 401
 
         else:
-            return jsonify({'error': 'No playlist with that name'})
+            return jsonify({'error': 'No playlist with that name'}), 401
 
 
         print(playlist, flush=True)
@@ -402,7 +397,7 @@ class Playlist:
                         return jsonify({'error': 'Only owners can delete playlists!'}), 403
                     
                     playlist = db.playlists.delete_one({'playlistName': playlistName})
-                    return jsonify({'message': 'Playlist deleted'}), 404
+                    return jsonify({'message': 'Playlist deleted'}), 202
 
 
 

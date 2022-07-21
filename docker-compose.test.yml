@@ -4,7 +4,7 @@ services:
     container_name: api_production
     build:
       context: .
-    command: bash -c "export FLASK_ENV='development' && pytest --cov-report term-missing --cov=." # pytest-watch
+    command: bash -c "export FLASK_ENV='development' && pytest-watch" #       pytest --cov-report term-missing --cov=.
     ports:
       - 5000:5000
     volumes:
